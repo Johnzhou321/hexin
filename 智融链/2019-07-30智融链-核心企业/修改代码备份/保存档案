@@ -1,0 +1,67 @@
+/**
+     * 保存企业档案
+     * @param enterpriseId 企业ID
+     * @param attachmentIds 附件ID集合
+     * @param creatorId 创建人
+     * @param type 标记文件类型：认证资料authen_datum,授权委托书author_delegation
+     * @return
+     * @author zhouguangming
+     * @date 7/30/19
+     * @since V0.1
+     */
+    @Transactional
+    public void saveEnterpriseArchive(Long enterpriseId, List<Long> attachmentIds, Long creatorId, String type){
+        if (attachmentIds != null && !attachmentIds.isEmpty()){
+            String archiveNo = generateArchiveNo();
+            attachmentIds.forEach(attachmentId -> {
+                EnterpriseArchive enterpriseArchive = new EnterpriseArchive();
+                enterpriseArchive.setEnterpriseId(enterpriseId);
+                enterpriseArchive.setAttachmentId(attachmentId);
+                enterpriseArchive.setArchiveNo(archiveNo);
+                enterpriseArchive.setTag(type);
+                enterpriseArchive.setCreator(creatorId);
+                enterpriseArchive.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            });
+        }
+    }
+
+    /**
+     * 生成档案编号，日期+四位随机数
+     * @return
+     * @author zhouguangming
+     * @date 7/30/19
+     * @since V1.3
+     */
+    private synchronized String generateArchiveNo(){
+        String nowDate = DateFormatUtils.format(new Date(), "yyyyMMdd");
+        int random = (int)((Math.random()*9+1)*1000);
+        return nowDate + random;
+    }
+
+    /**
+     * 保存开单、转单、融单档案
+     * @param enterpriseId 企业ID
+     * @param relateEntId 关联企业ID，开单为授信企业ID，转单为收单企业ID,融单为出资方ID
+     * @param attachmentIds 附件ID集合
+     * @param creatorId 创建人
+     * @param type 档案类型，0：开单,1:转单,2:融单
+     * @return
+     * @author zhouguangming
+     * @date 7/30/19
+     * @since V0.1
+     */
+    public void saveEntBillArchive(Long enterpriseId, Long relateEntId, List<Long> attachmentIds, Long creatorId, int type){
+        if (attachmentIds != null && !attachmentIds.isEmpty()){
+            String archiveNo = generateArchiveNo();
+            attachmentIds.forEach(attachmentId -> {
+                EnterpriseBillArchive enterpriseBillArchive = new EnterpriseBillArchive();
+                enterpriseBillArchive.setBillEntId(enterpriseId);
+                enterpriseBillArchive.setRellateEntId(relateEntId);
+                enterpriseBillArchive.setArchiveNo(archiveNo);
+                enterpriseBillArchive.setBillType(type);
+                enterpriseBillArchive.setAttachmentId(attachmentId);
+                enterpriseBillArchive.setCreator(creatorId);
+                enterpriseBillArchive.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            });
+        }
+    }

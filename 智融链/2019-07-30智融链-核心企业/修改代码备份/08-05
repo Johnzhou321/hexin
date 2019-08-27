@@ -1,0 +1,22 @@
+// 保存创建链条的附件
+    private List<Long> saveAttachments(List<AttForm> atts,long id) {
+        List<Long> attachmentIds = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(atts)){
+            for (AttForm att : atts) {
+                String tableKey = wrapAttType(att);
+                try {
+                    MultipartFile file = att.getFile();
+                    Attachment attachment = attachmentService.saveAttachment(file.getInputStream(),"合同附件",file.getOriginalFilename(),tableKey,id);
+                    attachmentIds.add(attachment.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return attachmentIds;
+    }
+
+
+ //保存开单档案
+ enterpriseArchiveService.saveEntBillArchive(chain.getId(), formData.getFactoringId(), attchmentIds, loggedUser.getId(), 0);

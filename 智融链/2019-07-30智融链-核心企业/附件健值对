@@ -1,0 +1,15 @@
+ENT_BUSINESS_LIC_ATT  营业执照附件
+ENT_CERT_ATT          资质证书附件
+ENT_IDCARD_ATT        法人代表身份证附件
+ENT_OTHER_ATT         其他文件附件
+ENT_USER_ATT          管理员身份证附件
+
+
+
+CONTRACT_ATT          合同文件
+INVOICE_ATT           发票文件
+INTERNAL_APPROVAL_ATT 内部审批文件
+RECEIVE_NOTE_ATT      收货单
+SEND_GOODS_ATT        发货单
+ACCOUNT_STATEMENT_ATT 对账单
+OTHER_ATT             其他

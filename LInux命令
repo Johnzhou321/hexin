@@ -1,0 +1,162 @@
+1、sudo nginx -s reload; systemctl start nginx;修改nginx配置文件vim /etc/nginx/sites-available/default
+2、git 提交代码
+git add . (不要忘记点.)
+git commit -m 'init'
+git push -u origin V1.1.x
+
+git checkout dev
+git pull origin dev  切换本地dev
+git merge origin V1.1.2 合并版本
+git push origin dev  推送到dev
+-----------
+git status	查看刚才提交文件当前状态
+git reset HEAD <file>...  取消某文件的暂存
+git branch -d dev  删除本地分支
+git checkout -b yourbranchname origin/oldbranchname  根据已有分支创建新的分支
+
+3、解压zip
+压缩命令 将message_service压缩 zip -r message_service.zip message_service/
+将压缩文件text.zip在当前目录下解压缩。
+unzip test.zip
+将压缩文件text.zip在指定目录/tmp下解压缩，如果已有相同的文件存在，要求unzip命令不覆盖原先的文件。
+unzip -n test.zip -d /tmp
+查看压缩文件目录，但不解压。
+unzip -v test.zip
+将压缩文件test.zip在指定目录/tmp下解压缩，如果已有相同的文件存在，要求unzip命令覆盖原先的文件。
+unzip -o test.zip -d tmp/
+tar解压tgz包
+tar -zvxf xxx.tgz -C /home/user/
+解压：rar x FileName.rar
+压缩：rar a FileName.rar DirName
+解压7z文件
+7z x yajiu.7z
+
+4、“apt-get”命令，这是用于管理已安装程序的通用命令。
+安装：apt-get install name
+卸载：apt-get remove name
+卸载并清除配置：apt-get --purge remove name 
+更新信息库：apt-get update  
+系统升级：apt-get upgrade 
+浏览已安装的软件包： dpkg --list 
+安装deb软件包：dpkg -i  pkgname.deb       
+删除deb软件包： dpkg -r pkgname.deb
+
+5、把本地jar加入到本地maven中
+install:install-file -Dfile=F:\files\tanzj\test.jar -DgroupId=com.tanzj -DartifactId=testJar -Dversion=1.0 -Dpackaging=jar
+
+6、远程连接其他服务器
+ssh root@39.96.163.138
+
+7、查看Linux系统信息
+ lscpu或者uname -a;     getconf LONG_BIT(查看系统位数)
+lsb_release -a   -查询系统版本信息
+ifconfig  --查看ip
+
+8、Oracle解析SQL优化
+explain plan for
+select * from table(dbms_xplan.display());
+select username,default_tablespace from user_users;  --查看当前用户表空间
+
+9、sudo dpkg --remove openoffice-debian-menus   移除莫安装包
+sudo apt -f install   修复依赖关系
+
+10、sslocal -c /etc/shadowsocks.json   启动shadowsocks
+
+11、docker pull centos:7 	拉取镜像
+docker run -d -i -t <IMAGE ID> /bin/bash  运行镜像,会生成一个容器ID,通过该容器ID进入容器
+docker exec -it <CONTAINER ID>或者name /bin/bash       进入容器  
+docker images   查询所以镜像
+docker rmi <imageID>   删除镜像
+docker rm <containerID> 删除容器
+Ctrl+P+Q    正常退出但不关闭容器     sudo docker attach c77327236868   重新进入刚才未关闭容器
+docker ps (当前正在运行容器) -a 所有运行过的容器
+docker start <CONTAINER ID>或者name 启动已停止容器
+docker run -d --name node --link selenium_hub:hub selenium/node-chrome-debug
+创建并启动名为node的容器，并把该容器和名为selenium_hub的容器链接起来。其中：--link selenium_hub:hub
+docker logs -f <containerID>/name  查看docker日志
+
+12、sudo service mongodb stop 　　关闭mongodb
+sudo service mongodb start	启动mongodb
+mongo				进入mongodb数据库
+
+13、netstat -nlt|grep 6379; lsof -i:8080; netstat -lntp|grep 8080	查看端口占用情况
+
+14、启动fastfds追踪服务器和存储服务器
+启动 fdfs_trackerd /etc/fdfs/tracker.conf
+启动 fdfs_storaged /etc/fdfs/storage.conf
+
+重启
+[root@fedora15 user]#/usr/local/bin/restart.sh /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf
+[root@fedora15 user]#/usr/local/bin/restart.sh/usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf
+
+15、jad使用
+cd /opt/jad
+sudo ./jad
+jad xxx.class
+
+16、jenkins安装配置
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword  密码文件(6c3c0a22a1114b3294eb14b98701782e)
+/etc/init.d/jenkins  /etc/default/jenkins  配置文件（/var/lib/jenkins/workspace/项目/targe/.jar）
+
+17、Linux远程拷贝
+scp -r<递归复制整个目录> root@39.96.163.138:/home/project/xyj.sql /home/user/Documents/
+
+18、启动aria2
+sudo /usr/bin/aria2c
+
+19、微信开发者工具
+cd /home/user/Software/wechat_web_devtools ./bin/wxdt
+
+20、window文件乱码处理
+iconv -f gb18030  -t utf8 1.txt -o 2.txt  
+使用命令符“iconv -f gb18030  -t utf8 1.txt -o 2.txt”把gb18030编码的1.txt转换成utf8的2.txt。这样2.txt就成为Linux支持的编码
+
+21、查看用户所在用户组
+groups <用户名>
+
+22、navicat到期删除试用期文件(或者在windows先用注册机生成注册码)
+rm -rf /home/user/.navicat64
+
+23、创建用户组及用户
+groupadd elk
+useradd elasticsearch -g elk
+passwd <用户名>修改密码
+./xxx &  后台运行sh命令
+
+24、apt-get安装lib，产生依赖包失败时,使用aptitude,aptitude在处理依赖问题上更佳一些
+sudo aptitude install libmysqlclient-dev
+运行后，不接受未安装方案，接受降级方案
+
+25. df -h  查询系统内存占用情况
+rm -rf /var/log/*清除系统日志文件
+
+26、nohup java -jar XXX.jar & 启动jar
+
+27、ln  -s  [源文件或目录]  [目标文件或目录]   
+创建/var/test 引向/var/www/test 文件夹 
+ln –s  /var/www/test   /var/test
+删除软链接   rm –rf test
+修改软链接
+ln –snf  [新的源文件或目录]  [目标文件或目录]
+修改指向的新路径
+ln –snf  /var/www/test1   /var/test
+
+28、find ~/ -name node  根据名称查找
+
+29、npm i optimize-css-assets-webpack-plugin@3.2.0  webpack-3.6.0打包版本不一致
+
+30、centos7端口操作：firewall-cmd --zone=public --add-port=80/tcp --permanent （--permanent永久生效，没有此参数重启后失效）
+firewall-cmd --zone=public --query-port=80/tcp  --查看端口
+firewall-cmd --zone=public --remove-port=80/tcp --permanent  删除端口
+firewall-cmd --zone=public --add-port=8080-9999/tcp --permanent  //永久，开放端口区间
+firewall-cmd --reload
+
+31、Postman安装文件地址
+C:\Users\<user>\AppData\Local\Postman -- windows
+~/.config/Postman    --linux
+
+32、pm2 start "/usr/local/bin/npm" --name "mall-admin" -- start .  后台启动vue项目（先进入项目）
+pm2 list
+pm2 stop    
+pm2 restart 
+pm2 delete
